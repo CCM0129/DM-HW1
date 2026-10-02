@@ -1,0 +1,25 @@
+﻿column,role,unit,available_at_prediction,dtype,missing_pct,n_unique,note
+row_id,id,-,no,int64,0.0,1508,穩定列編號(依評鑑日、來源編號排序);切分檔一律用它對應
+source_id,id,-,no,str,0.0,1508,"Tang 資料集的原始編號,僅供追溯"
+grading_date,date,-,maybe,str,0.0,629,"杯測評鑑日;用於時間切分,是否可當特徵須團隊決定(評鑑當下才產生)"
+grading_year,date,-,maybe,int64,0.0,11,"評鑑年;用於切分與切片,不可直接當數值特徵(會外插)"
+group_id,group,-,no,int64,0.0,842,"分組鍵(雜湊後的整數),給 GroupKFold 與群組自助法"
+group_level,group,-,no,str,0.0,5,分組鍵使用的層級:farm/company/mill/region/country
+country,candidate,-,yes,str,0.1,37,產國
+region,candidate,-,yes,str,3.9,419,產區(小寫、去重音;稀有值多)
+altitude_m,candidate,m,yes,float64,15.3,227,海拔;<=0 或 >3000 已設為缺失
+variety,candidate,-,yes,str,13.8,60,品種(約 60 種標籤;稀有類別由建模階段在訓練折內合併)
+processing_method,candidate,-,yes,str,10.3,11,處理法(原標籤小寫)
+processing_group,candidate,-,yes,str,10.3,5,處理法合併為 washed/natural/honey/semi_washed/other
+color,candidate,-,yes,str,17.7,6,生豆顏色(統一寫法)
+harvest_year_raw,reference,-,yes,str,3.1,52,收成年原始字串(格式混亂)
+harvest_year_start,candidate,year,yes,float64,3.9,14,收成年起始西元年;無法解析或矛盾者為缺失;不可直接當數值特徵
+moisture_pct,candidate,%,yes,float64,16.8,62,含水率;0 視為缺失;<5% 或 >20% 保留數值並標記
+moisture_suspect,flag,0/1,yes,int64,0.0,2,含水率 <5% 或 >20% 的標記(數值未更動)
+category_one_defects,candidate,count,yes,int64,0.0,16,第一類瑕疵數
+category_two_defects,candidate,count,yes,int64,0.0,38,第二類瑕疵數
+quakers,candidate,count,maybe,float64,0.1,12,"Quaker 豆數;烘焙後才能數出,是否算送測前已知須團隊決定"
+n_bags,candidate,bags,yes,float64,0.1,143,批次袋數
+bag_weight_kg,candidate,kg,yes,float64,3.6,53,每袋重量(公斤);1~2 kg 多為樣品袋
+cert_body,candidate,-,maybe,str,0.0,34,"評鑑機構;評鑑當下才確定且與年代高度相關,須團隊決定"
+total_cup_points,target,points,no,float64,0.0,181,目標:杯測總分(分)
