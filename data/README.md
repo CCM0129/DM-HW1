@@ -25,6 +25,10 @@ python src/clean_step1.py
 python src/clean_step2.py
 python src/clean_step3.py
 ```
+## 核對原始檔的版本與基本統計
+```
+python src/check_data.py
+```
 
 處理規則與每個欄位的去向見 [`docs/data_cleaning.md`](../docs/data_cleaning.md)。
 
