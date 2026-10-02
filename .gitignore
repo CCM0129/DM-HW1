@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# ===== HW1 =====
+data/raw/
+data/private/
+.DS_Store
