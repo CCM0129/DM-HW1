@@ -14,8 +14,9 @@
 ## 本 repo 內的檔案(`data/processed/`)
 | 檔案 | 內容 |
 |---|---|
-| `master_public.csv` | 處理後的資料,1,508 列、22 欄,含目標 `total_cup_points` |
+| `master_public.csv` | 處理後的資料,1,508 列、24 欄,含目標 `total_cup_points` |
 | `data_dictionary.csv` | 每個欄位的角色、單位、缺失率與備註 |
+| `split.csv` | 訓練 / 測試切分(`row_id`, `split`):依評鑑日取最後 20% 為測試集(2017-05-11 起,305 列),其餘 1,203 列為訓練集 |
 
 原始檔含個人資料(姓名、電話),**不放進 repo**。請自行從上述來源下載,放到 `data/raw/tang/`。
 
@@ -24,6 +25,7 @@
 python src/clean_step1.py
 python src/clean_step2.py
 python src/clean_step3.py
+python src/make_split.py
 ```
 ## 核對原始檔的版本與基本統計
 ```
@@ -35,3 +37,4 @@ python src/check_data.py
 ## 注意
 - 評鑑日涵蓋 2010–2018 與 2022–2023,中間 2019–2021 沒有資料。
 - `grading_date`、`grading_year` 只用於切分與切片,不當特徵。
+- `quakers`、`cert_body` 經團隊討論後決定當特徵(見 `docs/data_cleaning.md`)。

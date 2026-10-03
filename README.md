@@ -4,16 +4,21 @@
 預測 CQI 阿拉比卡批次的杯測總分(分),協助進口商決定哪些批次值得送測。
 
 ## 資料夾
-- `data/`:資料說明與處理後的資料(見 `data/README.md`)
-- `src/`:資料處理與分析程式
-- `docs/`:資料處理細節
+- `data/`:資料說明、處理後的資料與訓練 / 測試切分(見 `data/README.md`)
+- `src/`:資料清理、切分、探索分析與特徵工程程式
+- `docs/`:資料清理細節(`data_cleaning.md`)、探索分析與特徵工程(`feature_engineering.md`)、圖表(`eda_figures/`)與管線圖(`pipeline.png`)
+- `results/`:探索分析輸出的表格(`results/eda/`)
 - `requirements.txt`:套件版本
 
 ## 重現
+所有指令都在 repo 根目錄執行。資料取得與清理步驟見 `data/README.md`。
 ```
 pip install -r requirements.txt
+python src/make_split.py      # 訓練 / 測試切分 → data/processed/split.csv
+python src/eda.py             # 探索分析(只用訓練集)→ docs/eda_figures/、results/eda/
+python src/features.py        # 特徵工程(Set A / Set C)煙霧測試
+python src/plot_pipeline.py   # 管線圖 → docs/pipeline.png
 ```
-資料取得與處理步驟見 `data/README.md`。
 
 ## 授權與出處
 - 資料來源:Kaggle `erwinhmtang/coffee-quality-institute-reviews-may2023`。
