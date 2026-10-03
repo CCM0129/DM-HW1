@@ -1,5 +1,5 @@
 """探索性特徵分析(§4):只用訓練集,測試集完全不讀。
-圖輸出到 docs/eda_figures/,表輸出到 results/eda/。需先執行 src/make_split.py。"""
+圖輸出到 docs/eda_figures/,關鍵數字印在終端。需先執行 src/make_split.py。"""
 import sys
 from pathlib import Path
 
@@ -15,13 +15,11 @@ sys.path.insert(0, str(Path(__file__).parent))
 from features import CAT_HIGH, CAT_LOW, ENGINEERED, NUM_RAW, TARGET, CountryRelativeAltitude, add_engineered, load_data
 
 FIG = Path("docs/eda_figures")
-RES = Path("results/eda")
 YLIM = (74, 91)
 YLABEL = "Total cup points (points)"
 SHORT = {"Tanzania, United Republic Of": "Tanzania", "United States (Hawaii)": "Hawaii (US)"}
 
 FIG.mkdir(parents=True, exist_ok=True)
-RES.mkdir(parents=True, exist_ok=True)
 train, _ = load_data()           # 測試集丟掉不用
 tr = add_engineered(train)
 tr["alt_rel_country"] = CountryRelativeAltitude().fit(tr).transform(tr)[:, 0]
@@ -31,11 +29,9 @@ y = tr[TARGET]
 num_cols = NUM_RAW + ENGINEERED + ["altitude_m^2", "alt_rel_country"]
 print(f"訓練集 {len(tr)} 列;目標平均 {y.mean():.2f}、標準差 {y.std():.2f}、範圍 {y.min():.2f}~{y.max():.2f} 分")
 print(f"低於 {YLIM[0]} 分(圖中被裁掉)的點:{int((y < YLIM[0]).sum())} 個\n")
-hyp = []          # 每個假設的觀察與對應特徵 → results/eda/hypotheses.csv
 
 
 def note(tag, claim, evidence, feature):
-    hyp.append({"id": tag, "claim": claim, "evidence": evidence, "feature": feature})
     print(f"- {tag} {claim}:{evidence} → {feature}")
 
 
@@ -182,7 +178,6 @@ s6 = interaction_plot("h6_defects_by_bag.png", "H6", "category_two_defects", bag
 sm, ex = s6["sample bag (≤ 2.5 kg)"], s6["export bag (> 2.5 kg)"]
 note("H6", "樣品袋批次的第二類瑕疵扣分比出口袋重",
      f"每多 1 顆:樣品袋 {sm[0]:+.3f} ± {sm[1]:.3f}、出口袋 {ex[0]:+.3f} ± {ex[1]:.3f}", "交互作用:cat2_x_sample")
-pd.DataFrame(hyp).to_csv(RES / "hypotheses.csv", index=False)
 
 # ---- 關聯:Pearson / Spearman(數值)與互資訊(原始欄位)----
 rows = []
@@ -206,7 +201,6 @@ assoc = pd.DataFrame(rows)
 assoc["mutual_info"] = assoc["feature"].map(mi)
 assoc = (assoc.assign(_r=assoc["spearman_rho"].abs()).sort_values(["_r", "mutual_info"], ascending=False)
          .drop(columns="_r").round(4))
-assoc.to_csv(RES / "association.csv", index=False)
 
 # ---- 圖 3:關聯排名 ----
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 5))
@@ -252,7 +246,6 @@ for j, c in enumerate(num_cols):
     r2 = 1 - resid.var() / Z[:, j].var()
     vif.append({"feature": c, "vif": round(1 / (1 - r2), 2)})
 vif = pd.DataFrame(vif).sort_values("vif", ascending=False)
-vif.to_csv(RES / "vif.csv", index=False)
 
 # ---- 類別平均 ----
 gm = []
@@ -261,7 +254,6 @@ for c in ["country", "processing_group", "variety", "color"]:
     g.columns = ["level", "n", "mean", "median", "std"]
     gm.append(g[g["n"] >= 5].sort_values("mean", ascending=False).assign(column=c))
 gm = pd.concat(gm)[["column", "level", "n", "mean", "median", "std"]].round(2)
-gm.to_csv(RES / "group_means.csv", index=False)
 
 # ---- 摘要 ----
 pd.set_option("display.width", 160)
@@ -273,4 +265,4 @@ print(f"\n特徵間最大 |Spearman ρ|:{off.max():.2f}({' vs '.join(off.idxmax(
 rank_b = assoc[(assoc["kind"] == "raw") & (assoc["dtype_kind"] == "numeric")]["feature"].tolist()
 print("\n原始數值欄位依 |Spearman ρ| 排名(給 Set B 參考;正式的 Set B 必須在每個 CV 訓練折內重新挑):", rank_b)
 print("\n產國平均(n >= 20):", gm[(gm["column"] == "country") & (gm["n"] >= 20)].set_index("level")["mean"].to_dict())
-print(f"\n輸出:{sorted(p.name for p in FIG.glob('*.png'))} → {FIG};{sorted(p.name for p in RES.glob('*.csv'))} → {RES}")
+print(f"\n輸出:{sorted(p.name for p in FIG.glob('*.png'))} → {FIG}")
