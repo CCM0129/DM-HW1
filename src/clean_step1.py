@@ -43,8 +43,8 @@ df["grading_year"] = df["grading_date"].dt.year
 
 # 3. 海拔
 alt = df["Altitude"].astype(float)
-bad_alt = (alt <= 0) | (alt > 3000)
-note("海拔 <= 0 或 > 3000 公尺 → 缺失", bad_alt.sum(), "不是合理的咖啡種植海拔")
+bad_alt = (alt < 10) | (alt > 3000)
+note("海拔 < 10 或 > 3000 公尺 → 缺失", bad_alt.sum(), "不是合理的咖啡種植海拔;1~2 的值疑似以公里填寫")
 df["altitude_m"] = alt.where(~bad_alt)
 
 # 4. 含水率(原始是小數,如 0.117)

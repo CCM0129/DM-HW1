@@ -211,7 +211,7 @@ row_id,source_id,grading_date,grading_year,group_id,group_level,country,region,a
 209,731,2012-04-11,2012,32,farm,Brazil,grama valley,1100.0,mundo novo,natural / dry,natural,green,2012,2012.0,12.0,0,0,2,0.0,16.0,60.0,NUCOFFEE,82.33
 210,811,2012-04-11,2012,840,farm,Brazil,cerrado,1050.0,catuai,semi-washed / semi-pulped,semi_washed,blue_green,2012,2012.0,11.0,0,0,1,0.0,75.0,60.0,NUCOFFEE,82.0
 211,41,2012-04-12,2012,314,farm,Thailand,chiang rai,1300.0,caturra,washed / wet,washed,green,2012,2012.0,10.0,0,1,9,0.0,53.0,1.0,Specialty Coffee Association,86.17
-212,931,2012-04-12,2012,241,farm,Brazil,sul de minas,1.25,bourbon,semi-washed / semi-pulped,semi_washed,blue_green,2012,2012.0,12.0,0,0,2,0.0,300.0,1.0,NUCOFFEE,81.5
+212,931,2012-04-12,2012,241,farm,Brazil,sul de minas,,bourbon,semi-washed / semi-pulped,semi_washed,blue_green,2012,2012.0,12.0,0,0,2,0.0,300.0,1.0,NUCOFFEE,81.5
 213,525,2012-04-27,2012,461,farm,Guatemala,la reforma san marcos,1372.0,bourbon,washed / wet,washed,green,2012,2012.0,10.0,0,0,2,0.0,275.0,1.0,Asociacion Nacional Del Café,83.0
 214,1265,2012-04-30,2012,347,farm,Guatemala,oriente,1311.0,bourbon,washed / wet,washed,green,2012,2012.0,11.0,0,0,8,0.0,250.0,69.0,Asociacion Nacional Del Café,76.33
 215,334,2012-04-30,2012,149,farm,Guatemala,sacatepequez guatemala,1524.0,caturra,washed / wet,washed,green,2012,2012.0,10.0,0,0,0,0.0,250.0,69.0,Asociacion Nacional Del Café,83.67
@@ -656,7 +656,7 @@ row_id,source_id,grading_date,grading_year,group_id,group_level,country,region,a
 654,1227,2014-03-19,2014,231,company,United States (Hawaii),kona,,hawaiian kona,natural / dry,natural,blue_green,2014,2014.0,10.0,0,0,0,0.0,5.0,45.359237,Specialty Coffee Association,78.33
 655,48,2014-03-20,2014,335,farm,Colombia,tolima,1200.0,caturra,washed / wet,washed,green,2013,2013.0,12.0,0,1,1,0.0,1.0,2.0,Specialty Coffee Association,86.0
 656,346,2014-03-21,2014,664,company,Colombia,santander,1550.0,caturra,washed / wet,washed,,2014,2014.0,,0,0,0,0.0,250.0,70.0,Almacafé,83.58
-657,786,2014-03-21,2014,277,farm,Costa Rica,turrialba,1.3,caturra,washed / wet,washed,green,2013,2013.0,11.0,0,0,2,0.0,150.0,69.0,Specialty Coffee Association of Costa Rica,82.08
+657,786,2014-03-21,2014,277,farm,Costa Rica,turrialba,,caturra,washed / wet,washed,green,2013,2013.0,11.0,0,0,2,0.0,150.0,69.0,Specialty Coffee Association of Costa Rica,82.08
 658,150,2014-03-24,2014,515,farm,Guatemala,oriente,1219.0,bourbon,washed / wet,washed,green,2014,2014.0,9.0,0,0,0,0.0,250.0,69.0,Asociacion Nacional Del Café,84.58
 659,570,2014-03-24,2014,149,farm,Guatemala,antigua,1500.0,bourbon,washed / wet,washed,green,2014,2014.0,10.0,0,0,4,0.0,250.0,69.0,Asociacion Nacional Del Café,82.83
 660,461,2014-03-27,2014,209,farm,Guatemala,san marcos,1524.0,catuai,washed / wet,washed,green,2014,2014.0,9.0,0,0,1,0.0,200.0,69.0,Asociacion Nacional Del Café,83.17
@@ -714,7 +714,7 @@ row_id,source_id,grading_date,grading_year,group_id,group_level,country,region,a
 712,942,2014-05-26,2014,667,farm,Guatemala,san lucas toliman solola,1550.0,bourbon,washed / wet,washed,green,2014,2014.0,10.0,0,0,6,0.0,250.0,69.0,Asociacion Nacional Del Café,81.42
 713,248,2014-05-27,2014,146,company,Colombia,huila,1480.0,,washed / wet,washed,green,2014,2014.0,12.0,0,0,0,0.0,250.0,1.0,Almacafé,84.0
 714,249,2014-05-27,2014,664,company,Colombia,santander,1450.0,caturra,natural / dry,natural,green,2014,2014.0,12.0,0,0,0,0.0,250.0,70.0,Almacafé,84.0
-715,596,2014-05-27,2014,370,company,Colombia,huila,1.65,typica,washed / wet,washed,green,2014,2014.0,12.0,0,0,0,0.0,275.0,1.0,Almacafé,82.75
+715,596,2014-05-27,2014,370,company,Colombia,huila,,typica,washed / wet,washed,green,2014,2014.0,12.0,0,0,0,0.0,275.0,1.0,Almacafé,82.75
 716,993,2014-05-28,2014,609,farm,United States (Puerto Rico),yauco region,853.0,other,washed / wet,washed,green,2013,2013.0,,0,0,0,0.0,18.0,2.2679618500000003,Specialty Coffee Association,81.08
 717,149,2014-05-29,2014,537,farm,Guatemala,jalapa,1524.0,pacas,washed / wet,washed,green,2014,2014.0,11.0,0,0,1,0.0,250.0,69.0,Asociacion Nacional Del Café,84.58
 718,36,2014-05-30,2014,724,farm,Kenya,muranga,1800.0,sl34,washed / wet,washed,blue_green,2013,2013.0,12.0,0,0,1,0.0,320.0,1.0,Kenya Coffee Traders Association,86.25
@@ -865,14 +865,14 @@ row_id,source_id,grading_date,grading_year,group_id,group_level,country,region,a
 863,45,2015-01-29,2015,809,farm,Kenya,nyeri,1754.0,sl28,natural / dry,natural,blue_green,2014,2014.0,11.0,0,0,2,0.0,12.0,60.0,Kenya Coffee Traders Association,86.08
 864,1244,2015-02-03,2015,114,company,Costa Rica,occidental,1200.0,caturra,washed / wet,washed,green,2014,2014.0,12.0,0,2,4,0.0,250.0,1.0,Specialty Coffee Association of Costa Rica,77.92
 865,1299,2015-02-03,2015,114,company,Costa Rica,occidental,1200.0,caturra,washed / wet,washed,green,2014,2014.0,11.0,0,0,7,0.0,250.0,1.0,Specialty Coffee Association of Costa Rica,71.75
-866,899,2015-02-03,2015,277,farm,Costa Rica,turrialba,1.3,caturra,washed / wet,washed,green,2015,2015.0,12.0,0,0,1,0.0,250.0,69.0,Specialty Coffee Association of Costa Rica,81.58
+866,899,2015-02-03,2015,277,farm,Costa Rica,turrialba,,caturra,washed / wet,washed,green,2015,2015.0,12.0,0,0,1,0.0,250.0,69.0,Specialty Coffee Association of Costa Rica,81.58
 867,507,2015-02-13,2015,834,farm,Brazil,high mogiana,1000.0,catuai,natural / dry,natural,green,2014,2014.0,,0,0,0,0.0,305.0,2.0,Brazil Specialty Coffee Association,83.0
 868,641,2015-02-15,2015,527,company,Thailand,chiangrai,1450.0,caturra,washed / wet,washed,blue_green,2014,2014.0,12.0,0,0,1,0.0,50.0,20.0,Specialty Coffee Institute of Asia,82.58
 869,659,2015-02-15,2015,527,company,Thailand,chiangrai,1450.0,caturra,washed / wet,washed,,2014,2014.0,11.0,0,0,0,0.0,50.0,20.0,Specialty Coffee Institute of Asia,82.5
 870,977,2015-02-15,2015,527,company,Thailand,chiangrai,1450.0,caturra,washed / wet,washed,blue_green,2014,2014.0,12.0,0,0,0,0.0,20.0,20.0,Specialty Coffee Institute of Asia,81.17
 871,1100,2015-02-20,2015,575,farm,Nicaragua,matagalpa,900.0,caturra,washed / wet,washed,green,2015,2015.0,11.0,0,0,2,0.0,275.0,69.0,Asociación de Cafés Especiales de Nicaragua,80.25
 872,569,2015-02-20,2015,708,farm,United States,berastagi,1200.0,other,other,other,,2014,2014.0,,0,0,9,0.0,300.0,60.0,Specialty Coffee Association,82.83
-873,1053,2015-02-27,2015,495,farm,Costa Rica,tarrazu,1.85,caturra,washed / wet,washed,blue_green,2015,2015.0,11.0,0,0,4,0.0,240.0,1.0,Specialty Coffee Association of Costa Rica,80.67
+873,1053,2015-02-27,2015,495,farm,Costa Rica,tarrazu,,caturra,washed / wet,washed,blue_green,2015,2015.0,11.0,0,0,4,0.0,240.0,1.0,Specialty Coffee Association of Costa Rica,80.67
 874,990,2015-03-04,2015,776,company,United States,central america,1707.0,pache comun,natural / dry,natural,,2014,2014.0,,0,0,0,0.0,1.0,2.2679618500000003,Specialty Coffee Association,81.08
 875,715,2015-03-10,2015,388,farm,Guatemala,huehuetenango,1676.0,bourbon,washed / wet,washed,green,2015,2015.0,10.0,0,0,6,0.0,275.0,69.0,Asociacion Nacional Del Café,82.33
 876,1045,2015-03-11,2015,422,farm,Honduras,central region,1450.0,catuai,natural / dry,natural,green,2015,2015.0,13.0,0,0,1,0.0,275.0,1.0,Instituto Hondureño del Café,80.75
@@ -999,18 +999,18 @@ row_id,source_id,grading_date,grading_year,group_id,group_level,country,region,a
 997,915,2015-09-17,2015,165,farm,Taiwan,古坑鄉荷包村尖山坑60號,180.0,typica,natural / dry,natural,green,2015,2015.0,12.0,0,0,2,0.0,123.0,2.0,Blossom Valley International,81.5
 998,452,2015-09-29,2015,506,farm,Guatemala,oriente,1650.0,bourbon,washed / wet,washed,green,2015,2015.0,12.0,0,0,3,0.0,100.0,69.0,Asociacion Nacional Del Café,83.17
 999,1038,2015-10-08,2015,477,farm,Brazil,monte carmelo,,,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,60.0,Brazil Specialty Coffee Association,80.75
-1000,280,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,83.83
-1001,482,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,3,0.0,320.0,2.0,Brazil Specialty Coffee Association,83.08
-1002,614,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.67
-1003,684,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.42
+1000,280,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,83.83
+1001,482,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,3,0.0,320.0,2.0,Brazil Specialty Coffee Association,83.08
+1002,614,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.67
+1003,684,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.42
 1004,713,2015-10-08,2015,647,farm,Brazil,south of minas,1268.0,bourbon,natural / dry,natural,green,2015/2016,2015.0,7.0,0,0,0,0.0,12.0,2.0,Specialty Coffee Association,82.33
-1005,738,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,9,0.0,180.0,2.0,Brazil Specialty Coffee Association,82.25
-1006,762,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.17
-1007,781,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.08
-1008,839,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.83
-1009,840,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,300.0,2.0,Brazil Specialty Coffee Association,81.83
-1010,878,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.67
-1011,964,2015-10-08,2015,647,farm,Brazil,south of minas,1.0,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.25
+1005,738,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,9,0.0,180.0,2.0,Brazil Specialty Coffee Association,82.25
+1006,762,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.17
+1007,781,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,82.08
+1008,839,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.83
+1009,840,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,300.0,2.0,Brazil Specialty Coffee Association,81.83
+1010,878,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,0,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.67
+1011,964,2015-10-08,2015,647,farm,Brazil,south of minas,,yellow bourbon,natural / dry,natural,green,2015/2016,2015.0,,0,0,1,0.0,320.0,2.0,Brazil Specialty Coffee Association,81.25
 1012,400,2015-10-12,2015,647,farm,Brazil,south of minas,1227.0,catuai,semi-washed / semi-pulped,semi_washed,green,2015/2016,2015.0,10.0,0,1,5,0.0,10.0,2.0,Specialty Coffee Association,83.33
 1013,761,2015-10-20,2015,299,company,"Tanzania, United Republic Of",northern,1600.0,other,washed / wet,washed,green,2015/2016,2015.0,12.0,0,0,1,0.0,300.0,60.0,Tanzanian Coffee Board,82.17
 1014,1052,2015-10-23,2015,149,farm,Guatemala,antigua,1500.0,bourbon,washed / wet,washed,green,2015/2016,2015.0,11.0,0,0,0,0.0,150.0,60.0,Asociacion Nacional Del Café,80.67
