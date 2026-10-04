@@ -1,12 +1,14 @@
-"""特徵工程(§5):Set A(原始欄位)與 Set C(原始 + 工程特徵)的前處理 Pipeline。
+"""特徵工程(§5):Set A(原始欄位)、Set B(Set A 中相關最高的 k 欄)與 Set C(原始 + 工程特徵)的前處理 Pipeline。
 用法:make_pipeline(build_features("C"), Ridge());輸入是主檔的列(DataFrame),所有需要學習的參數只在 fit 時從訓練資料學。
 直接執行 python src/features.py 會在訓練集上做煙霧測試(非正式結果)。"""
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scipy.stats import rankdata
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
+from sklearn.feature_selection import SelectKBest
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline, make_pipeline
@@ -75,6 +77,16 @@ class CountryRelativeAltitude(BaseEstimator, TransformerMixin):
         return np.array(["alt_rel_country"], dtype=object)
 
 
+def abs_spearman(X, y):
+    """每一欄與目標的 |Spearman ρ|(與 §4 的排名相同);常數欄給 0。給 SelectKBest 當 score_func。"""
+    xr = rankdata(X, axis=0)
+    yr = rankdata(y)
+    xr, yr = xr - xr.mean(axis=0), yr - yr.mean()
+    with np.errstate(invalid="ignore", divide="ignore"):
+        rho = xr.T @ yr / (np.sqrt((xr ** 2).sum(axis=0)) * np.sqrt((yr ** 2).sum()))
+    return np.nan_to_num(np.abs(rho))
+
+
 def _numeric(indicator=True):
     return make_pipeline(SimpleImputer(strategy="median", add_indicator=indicator), StandardScaler())
 
@@ -84,24 +96,29 @@ def _onehot():
                          OneHotEncoder(handle_unknown="infrequent_if_exist", min_frequency=10, sparse_output=False))
 
 
-def build_features(feature_set="C", drop_group=None):
-    """回傳前處理 Pipeline。feature_set:"A"(原始)或 "C"(我們的);drop_group 只用於 C,可為 FEATURE_GROUPS 的鍵。"""
-    if feature_set not in ("A", "C"):
-        raise ValueError(f"feature_set 須為 'A' 或 'C',收到 {feature_set!r}")
-    if drop_group is not None and (feature_set != "C" or drop_group not in FEATURE_GROUPS):
-        raise ValueError(f"drop_group 只用於 Set C,且須為 {list(FEATURE_GROUPS)} 之一")
+def build_features(feature_set="C", drop_group=None, k=None):
+    """回傳前處理 Pipeline。feature_set:"A"(原始)、"B"(Set A 中 |Spearman ρ| 最高的 k 欄)或 "C"(我們的)。
+    drop_group 只用於 C:一個 FEATURE_GROUPS 的鍵,或多個鍵的清單(一次拿掉多組)。
+    k 只用於 B 且必填;挑選在 fit 時進行,放進 CV 就會在每個訓練折內重新挑。"""
+    if feature_set not in ("A", "B", "C"):
+        raise ValueError(f"feature_set 須為 'A'、'B' 或 'C',收到 {feature_set!r}")
+    drops = {drop_group} if isinstance(drop_group, str) else set(drop_group or ())
+    if drops and (feature_set != "C" or not drops <= FEATURE_GROUPS.keys()):
+        raise ValueError(f"drop_group 只用於 Set C,且須為 {list(FEATURE_GROUPS)} 中的一個或多個")
+    if (feature_set == "B") != (k is not None):
+        raise ValueError("k 只用於 Set B,且 Set B 必須給 k")
 
-    if feature_set == "A":
+    if feature_set in ("A", "B"):
         blocks = [("num", _numeric(), NUM_RAW), ("onehot", _onehot(), CAT_LOW + CAT_HIGH)]
     else:
-        eng = [c for c in ENGINEERED if drop_group is None or c not in FEATURE_GROUPS[drop_group]]
+        eng = [c for c in ENGINEERED if not any(c in FEATURE_GROUPS[g] for g in drops)]
         blocks = [("num", _numeric(), NUM_RAW),
                   ("eng", _numeric(indicator=False), eng)]     # 缺失指標已由原始欄位提供,不重複
-        if drop_group != "polynomial":       # 海拔先在訓練折內置中、標準化再平方(H1)
+        if "polynomial" not in drops:        # 海拔先在訓練折內置中、標準化再平方(H1)
             blocks.append(("poly", make_pipeline(SimpleImputer(strategy="median"), StandardScaler(),
                                                  FunctionTransformer(np.square, feature_names_out=lambda t, n: ["altitude_m^2"]),
                                                  StandardScaler()), ["altitude_m"]))
-        if drop_group == "origin":           # 拿掉產地特徵時,產國 / 產區 / 品種 / 評鑑機構退回 one-hot,不完全丟掉資訊
+        if "origin" in drops:                # 拿掉產地特徵時,產國 / 產區 / 品種 / 評鑑機構退回 one-hot,不完全丟掉資訊
             blocks.append(("onehot", _onehot(), CAT_LOW + CAT_HIGH))
         else:
             blocks += [
@@ -115,7 +132,10 @@ def build_features(feature_set="C", drop_group=None):
 
     engineer = FunctionTransformer(add_engineered, validate=False,
                                    feature_names_out=lambda self, names: list(names) + ENGINEERED)
-    return Pipeline([("eng", engineer), ("pre", ColumnTransformer(blocks, remainder="drop"))])
+    steps = [("eng", engineer), ("pre", ColumnTransformer(blocks, remainder="drop"))]
+    if feature_set == "B":
+        steps.append(("select", SelectKBest(abs_spearman, k=k)))
+    return Pipeline(steps)
 
 
 if __name__ == "__main__":
@@ -126,11 +146,11 @@ if __name__ == "__main__":
     y, groups = train[TARGET], train["group_id"]
     cv = GroupKFold(n_splits=5)
     print(f"煙霧測試(非正式結果,正式調參見 §5.2/§6):訓練集 {len(train)} 列,Ridge(alpha=1),5 折 GroupKFold\n")
-    settings = [("A", None), ("C", None)] + [("C", g) for g in FEATURE_GROUPS]
-    for s, g in settings:
-        fe = build_features(s, g).fit(train, y)
+    settings = [("A", None, None), ("B", None, 33), ("C", None, None)] + [("C", g, None) for g in FEATURE_GROUPS]
+    for s, g, k in settings:
+        fe = build_features(s, g, k).fit(train, y)
         width = len(fe.get_feature_names_out())
-        mae = -cross_val_score(make_pipeline(build_features(s, g), Ridge(alpha=1.0)), train, y,
+        mae = -cross_val_score(make_pipeline(build_features(s, g, k), Ridge(alpha=1.0)), train, y,
                                groups=groups, cv=cv, scoring="neg_mean_absolute_error")
-        label = f"Set {s}" + (f" − {g}" if g else "")
+        label = f"Set {s}" + (f" − {g}" if g else "") + (f" (k={k})" if k else "")
         print(f"- {label:<20s} 特徵數 {width:3d}  CV MAE {mae.mean():.3f} ± {mae.std():.3f} 分")
