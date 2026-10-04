@@ -5,7 +5,7 @@
 
 ## 資料夾
 - `data/`:資料說明、處理後的資料與訓練 / 測試切分(見 `data/README.md`)
-- `src/`:資料清理、切分、探索分析與特徵工程程式
+- `src/`:資料清理、切分、探索分析與特徵工程程式(用法見 `src/README.md`)
 - `docs/`:資料清理細節(`data_cleaning.md`)、探索分析與特徵工程(`feature_engineering.md`)、圖表(`eda_figures/`)與管線圖(`pipeline.png`)
 - `requirements.txt`:套件版本
 
