@@ -1,0 +1,11 @@
+feature_1,feature_2,corr
+bag_weight_kg,small_bag,-0.9250625535963606
+category_one_defects,log_cat1,0.8371916058396073
+country,cert_body,0.8126681965628841
+category_two_defects,cat2_x_sample,0.8003366202423828
+alt_x_washed,processing_group_washed,0.7306122572385333
+altitude_m,alt_rel_country,0.6579358345284724
+country,region,0.645858332966758
+category_two_defects,specialty_grade,-0.6142724260812031
+processing_group_natural,processing_group_washed,-0.6102788856763669
+log_cat1,specialty_grade,-0.6012867854009257

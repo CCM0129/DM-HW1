@@ -1,0 +1,5 @@
+{
+  "model": "ridge_setC",
+  "cutoff": 80.5,
+  "rule": "good_killed <= 0.05"
+}

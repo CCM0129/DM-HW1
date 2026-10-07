@@ -1,0 +1,9 @@
+{
+  "ridge_setC": {
+    "alpha": 1000.0
+  },
+  "enet_setC": {
+    "alpha": 0.5623413251903491,
+    "l1_ratio": 0.1
+  }
+}
