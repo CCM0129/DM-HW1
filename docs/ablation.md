@@ -98,21 +98,7 @@
 
 `>1900 m` 僅 23 筆，且海拔缺失 236 筆；可討論誤差差異，但避免把小樣本切片的差距說成穩定規律。注意 `C − origin` 是**產地特徵表示方法**的改動。
 
-## 5. Paper 可使用的英文段落（draft）
-
-### Experimental setup
-
-We evaluated feature ablations using Ridge regression and fixed five-fold GroupKFold splits on 1,203 training samples. The target was the continuous coffee cupping score (`total_cup_points`). All settings used the same fold assignments and hyperparameter search protocol; supervised feature selection was fitted within training folds. Set A used raw numeric predictors and one-hot-encoded categorical predictors. Set B selected the top 33 encoded features by absolute Spearman correlation, with the value of k chosen from a candidate grid according to cross-validated MAE. Set C added domain-motivated nonlinear, interaction, transformation, and origin-related representations. We report mean and sample standard deviation across folds for MAE, RMSE, and R². The chronological holdout set was not used in the ablation study.
-
-### Ablation results and interpretation
-
-Among the three primary feature settings, Set C achieved the lowest cross-validated MAE (1.612 ± 0.165), compared with Set A (1.665 ± 0.159) and Set B (1.662 ± 0.158). Full Set C outperformed both baselines in all five matched folds. Removing polynomial, interaction, or transformation features changed average MAE by no more than approximately 0.002, suggesting limited incremental benefit under the current Ridge specification. In contrast, replacing origin-related target-encoded representations with one-hot encodings and omitting country-relative altitude increased MAE to 1.669. Thus, the observed improvement was primarily associated with **how origin information was represented**, not with all feature groups equally. The paired-fold tests are exploratory rather than confirmatory because training subsets overlap and model choices were made using the same cross-validation procedure.
-
-### Slice-level analysis and limitations
-
-Out-of-fold errors varied across processing methods and altitude bands. For example, the model had a higher MAE among lots above 1,900 m (2.523; n=23) than among those at 1,500–1,900 m (1.198; n=290), although the high-altitude group was small. The origin-representation ablation increased MAE within each recorded altitude band. These subgroup differences are descriptive and may reflect differences in sample composition or missingness rather than causal effects. Generalization should be checked using the untouched chronological holdout only after the final method is fixed.
-
-## 6. 重現方式與 GitHub 檔案對照
+## 5. 重現方式與 GitHub 檔案對照
 
 Run from the **model worktree / repository**, with the feature branch/worktree made available via `DM_FEATURE_REPO`:
 
@@ -139,7 +125,7 @@ python src/ablation.py
 | `results/ablation_altitude_slice.csv` | Full C vs `C - origin` 的海拔子群 MAE |
 | `results/ablation/set_b_k_search.csv` | **目前未提交**；只有用 `--retune-k` 重跑後才會生成 |
 
-## 7. 交給 Paper 組前請核對
+## 6. 交給 Paper 組前請核對
 
 - **Prediction-time availability / leakage**：小組目前決定保留 `quakers` 和 `cert_body`，但先前資料清理文件曾寫排除。請確認它們在「杯測前預測」的實際情境可取得（尤其 `quakers` 可能涉及烘焙／檢測流程），並同步修正文件；不能只因資料表有欄位便宣稱沒有 leakage。
 - **評估描述**：本文件全部成績為 train-only CV/OOF，**不是 305 筆 held-out test 分數**；test 應在完整模型選擇與論文分析固定後才評估一次。
